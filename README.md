@@ -20,9 +20,9 @@ MySQL 8.0 Community
 Moq
   
 ## Toturial  
-*Download source code, open .sln file with VS or VS code.
-*Open Nuget terminal, install Moq Package to the unit test library. 
-CLI: Install-Package Moq -ProjectName UniversityManagementSystem.xUnit  
+ *Download source code, open .sln file with VS or VS code.
+ *Open Nuget terminal, install Moq Package to the unit test library. 
+ CLI: Install-Package Moq -ProjectName UniversityManagementSystem.xUnit  
 
 ***
 
