@@ -14,10 +14,10 @@ namespace UniversityManagementSystem.Domain.Interfaces.StudentInterface
         Task<IEnumerable<Student>> GetAllUndergraduateStudentsAsync();
         Task<IEnumerable<Student>> GetAllGraduateStudentsAsync();
         Task<IEnumerable<Student>> GetAllDoctoralStudentsAsync();
-        Task<IEnumerable<Student>> GetAllStudentsWithFacultyIdAsync(int facultyId);
-        Task<IEnumerable<Student>> GetAllUndergraduateStudentsWithFacultyIdAsync(int facultyId);
-        Task<IEnumerable<Student>> GetAllGraduateStudentsWithFacultyIdAsync(int facultyId);
-        Task<IEnumerable<Student>> GetAllDoctoralStudentsWithFacultyIdAsync(int facultyId);
-        Task<IEnumerable<Student>> GetAllStudentsWithCourseIdAsync(int courseId);
+        Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(int facultyId);
+        Task<IEnumerable<Student>> GetAllUndergraduateStudentsByFacultyIdAsync(int facultyId);
+        Task<IEnumerable<Student>> GetAllGraduateStudentsByFacultyIdAsync(int facultyId);
+        Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(int facultyId);
+        Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(int courseId);
     }
 }

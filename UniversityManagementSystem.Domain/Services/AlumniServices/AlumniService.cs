@@ -1,5 +1,7 @@
 ﻿
+using UniversityManagementSystem.Domain.Entities.AcademicEntity;
 using UniversityManagementSystem.Domain.Entities.OtherEntity;
+using UniversityManagementSystem.Domain.Interfaces.AcademicInterface;
 using UniversityManagementSystem.Domain.Interfaces.AlumniInterface;
 
 namespace UniversityManagementSystem.Domain.Services.AlumniServices
@@ -7,9 +9,11 @@ namespace UniversityManagementSystem.Domain.Services.AlumniServices
     public class AlumniService : IAlumniService
     {
         private readonly IAlumniRepository _alumniRepository;
-        public AlumniService(IAlumniRepository alumniRepository)
+        private readonly IFacultyRepository _facultyRepository;
+        public AlumniService(IAlumniRepository alumniRepository,IFacultyRepository facultyRepository)
         {
             _alumniRepository = alumniRepository??throw new ArgumentNullException();
+            _facultyRepository=facultyRepository??throw new ArgumentNullException();
         }
         /// <summary>
         /// Return an alumni instance by Id field, if the alumni is not found or id is invalid, the return value will be null.
@@ -101,7 +105,12 @@ namespace UniversityManagementSystem.Domain.Services.AlumniServices
         }
         public async Task<IEnumerable<Alumni>> GetAllAlumniByFacultyIdAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id < 0)
+                return null;
+            Faculty faculty=await _facultyRepository.GetFacultyByIdAsync(id);
+            if (faculty == null)
+                return null;
+            return await _alumniRepository.GetAllAlumniByFacultyIdAsync(id);
         }
         public async Task<int> AddCurrentYearAlumniAsync(IEnumerable<Alumni> alumniList)
         {

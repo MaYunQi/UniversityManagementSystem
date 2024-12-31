@@ -27,9 +27,20 @@ namespace UniversityManagementSystem.Domain.Services.AcademicServices
             return result;
         }
 
-        public Task<int> DeleteFacultyAsync(int id)
+        public async Task<int> DeleteFacultyAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id < 0)
+                return -1;
+            int result = await _facultyRepository.DeleteFacultyAsync(id);
+            if (result == 0) 
+            {
+                Faculty local = await _facultyRepository.GetFacultyByIdAsync(id);
+                if (local != null)
+                    return 0;
+                else
+                    return -1;
+            }
+            return result;
         }
 
         public Task<IEnumerable<Faculty>> GetAllFacultiesAsync()
@@ -44,9 +55,20 @@ namespace UniversityManagementSystem.Domain.Services.AcademicServices
             return await _facultyRepository.GetFacultyByIdAsync(id);
         }
 
-        public Task<int> UpdateFacultyAsync(Faculty faculty)
+        public async Task<int> UpdateFacultyAsync(Faculty faculty)
         {
-            throw new NotImplementedException();
+            if(faculty==null)
+                return -1;
+            int result = await _facultyRepository.UpdateFacultyAsync(faculty);
+            if (result == 0)
+            {
+                Faculty local = await _facultyRepository.GetFacultyByIdAsync(faculty.FacultyId);
+                if (local != null) 
+                    return 0;
+                else 
+                    return -1;
+            }
+            return result;
         }
     }
 }

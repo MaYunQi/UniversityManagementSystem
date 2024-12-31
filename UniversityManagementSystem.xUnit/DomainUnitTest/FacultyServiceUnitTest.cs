@@ -111,9 +111,91 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             _mockRepository.Verify(repo => repo.AddFacultyAsync(faculty), Times.Once);
         }
         [Fact]
-        public async Task DeleteFacultyAsync()
+        public async Task DeleteFacultyAsync_InvalidId_ReturnMinusOne()
         {
+            int id = -1;
+            int expected = -1;
+            int result=await _facultyService.DeleteFacultyAsync(id);
+            Assert.Equal(expected, result);
+        }
+        [Fact]
+        public async Task DeleteFacultyAsync_FacultyNotFound_ReturnMinusOne()
+        {
+            int id = 0;
+            int expected = -1;
+            _mockRepository.Setup(repo => repo.DeleteFacultyAsync(id)).ReturnsAsync(0);
+            _mockRepository.Setup(repo=>repo.GetFacultyByIdAsync(id)).ReturnsAsync((Faculty)null);
 
+            int result = await _facultyService.DeleteFacultyAsync(id);
+            Assert.Equal(expected, result);
+            _mockRepository.Verify(repo => repo.DeleteFacultyAsync(id),Times.Once);
+        }
+        [Fact]
+        public async Task DeleteFacultyAsync_DeleteError_ReturnZero()
+        {
+            int id = 1;
+            int expected = 0;
+            _mockRepository.Setup(repo => repo.DeleteFacultyAsync(id)).ReturnsAsync(expected);
+            _mockRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(new Faculty()); ;
+
+            int result = await _facultyService.DeleteFacultyAsync(id);
+            Assert.Equal(expected, result);
+            _mockRepository.Verify(repo => repo.DeleteFacultyAsync(id), Times.Once);
+        }
+        [Fact]
+        public async Task DeleteFacultyAsync_DeleteSuccess_ReturnOne()
+        {
+            int id = 1;
+            int expected = 1;
+            _mockRepository.Setup(repo=>repo.DeleteFacultyAsync(id)).ReturnsAsync(expected);
+            
+            int result = await _facultyService.DeleteFacultyAsync(id);
+            Assert.Equal(expected, result);
+            _mockRepository.Verify(repo => repo.DeleteFacultyAsync(id),Times.Once);
+        }
+        [Fact]
+        public async Task UpdateFacultyAsync_NullFaculty_ReturnMinusOne()
+        {
+            int expected = -1;
+            Faculty faculty = null;
+
+            int result = await _facultyService.UpdateFacultyAsync(faculty);
+            Assert.Equal(expected, result);
+        }
+        [Fact]
+        public async Task UpdateFacultyAsync_FacultyNotFound_ReturnMinusOne()
+        {
+            int expected = -1;
+            Faculty faculty = new Faculty() { FacultyId=1};
+            _mockRepository.Setup(repo => repo.UpdateFacultyAsync(faculty)).ReturnsAsync(0);
+            _mockRepository.Setup(repo =>repo.GetFacultyByIdAsync(faculty.FacultyId)).ReturnsAsync((Faculty)null);
+
+            int result = await _facultyService.UpdateFacultyAsync(faculty);
+            Assert.Equal(expected, result);
+            _mockRepository.Verify(repo => repo.UpdateFacultyAsync(faculty),Times.Once);
+        }
+        [Fact]
+        public async Task UpdateFacultyAsync_DeleteError_ReturnZero()
+        {
+            int expected =0;
+            Faculty faculty = new Faculty() { FacultyId = 1 };
+            _mockRepository.Setup(repo => repo.UpdateFacultyAsync(faculty)).ReturnsAsync(0);
+            _mockRepository.Setup(repo => repo.GetFacultyByIdAsync(faculty.FacultyId)).ReturnsAsync(faculty);
+
+            int result = await _facultyService.UpdateFacultyAsync(faculty);
+            Assert.Equal(expected, result);
+            _mockRepository.Verify(repo => repo.UpdateFacultyAsync(faculty), Times.Once);
+        }
+        [Fact]
+        public async Task UpdateFacultyAsync_DeleteSuccess_ReturnOne()
+        {
+            int expected = 1;
+            Faculty faculty = new Faculty() { FacultyId = 1 }; 
+            _mockRepository.Setup(repo => repo.UpdateFacultyAsync(faculty)).ReturnsAsync(1);
+
+            int result = await _facultyService.UpdateFacultyAsync(faculty);
+            Assert.Equal(expected, result);
+            _mockRepository.Verify(repo => repo.UpdateFacultyAsync(faculty), Times.Once);
         }
     }
 }

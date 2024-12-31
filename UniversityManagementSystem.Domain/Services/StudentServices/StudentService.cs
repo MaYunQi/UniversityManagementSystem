@@ -1,6 +1,8 @@
 ﻿
+using UniversityManagementSystem.Domain.Entities.AcademicEntity;
 using UniversityManagementSystem.Domain.Entities.OtherEntity;
 using UniversityManagementSystem.Domain.Entities.StudentEntity;
+using UniversityManagementSystem.Domain.Interfaces.AcademicInterface;
 using UniversityManagementSystem.Domain.Interfaces.StudentInterface;
 
 namespace UniversityManagementSystem.Domain.Services.StudentServices
@@ -8,9 +10,11 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
     public class StudentService : IStudentService
     {
         private readonly IStudentRepository _studentRepository;
-        public StudentService(IStudentRepository studentRepository)
+        private readonly IFacultyRepository _facultyRepository;
+        public StudentService(IStudentRepository studentRepository,IFacultyRepository facultyRepository)
         {
             _studentRepository = studentRepository;
+            _facultyRepository=facultyRepository;
         }
 
         public async Task<Student> GetStudentByIdAsync(int id)
@@ -89,23 +93,37 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
         {
             return await _studentRepository.GetAllStudentsByDegreeAsync(Degree.PhD);
         }
-        public Task<IEnumerable<Student>> GetAllStudentsWithFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(int facultyId)
         {
-            throw new NotImplementedException();
+            if (facultyId < 0)
+                return null;
+            Faculty faculty=await _facultyRepository.GetFacultyByIdAsync(facultyId);
+            if (faculty == null)
+                return null;
+            return await _studentRepository.GetAllStudentsByFacultyIdAsync(facultyId);
         }
-        public Task<IEnumerable<Student>> GetAllUndergraduateStudentsWithFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllUndergraduateStudentsByFacultyIdAsync(int facultyId)
         {
-            throw new NotImplementedException();
+            IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
+            if (allStudents == null)
+                return null;
+            return allStudents.Where(stu => stu.Degree == Degree.Bachelor).ToList();
         }
-        public async Task<IEnumerable<Student>> GetAllGraduateStudentsWithFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllGraduateStudentsByFacultyIdAsync(int facultyId)
         {
-            throw new NotImplementedException();
+            IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
+            if (allStudents == null)
+                return null;
+            return allStudents.Where(stu => stu.Degree == Degree.Master).ToList();
         }
-        public async Task<IEnumerable<Student>> GetAllDoctoralStudentsWithFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(int facultyId)
         {
-            throw new NotImplementedException();
+            IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
+            if (allStudents == null)
+                return null;
+            return allStudents.Where(stu => stu.Degree == Degree.PhD).ToList();
         }
-        public Task<IEnumerable<Student>> GetAllStudentsWithCourseIdAsync(int courseId)
+        public Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(int courseId)
         {
             throw new NotImplementedException();
         }
