@@ -1,7 +1,7 @@
 ﻿
 namespace UniversityManagementSystem.Domain.Entities.OtherEntity
 {
-    public enum CourseType
+    public enum RegisterationType
     {
         Core,
         Elective

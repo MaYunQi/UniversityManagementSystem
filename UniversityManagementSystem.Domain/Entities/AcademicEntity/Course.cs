@@ -6,7 +6,8 @@ namespace UniversityManagementSystem.Domain.Entities.AcademicEntity
     {
         public int CourseId { get; set; }
         public string Name { get; set; }
-        public CourseType CourseType { get; set; }
-        public int MajorID {  get; set; }
+        public RegisterationType RegisterationType { get; set; }
+        public int FacultiId { get; set; }
+        public int MajorId {  get; set; }
     }
 }

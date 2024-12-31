@@ -10,11 +10,11 @@ namespace UniversityManagementSystem.Domain.Interfaces.AlumniInterface
         Task<IEnumerable<Alumni>> GetAllAlumniByYearAsync(int year);
         Task<IEnumerable<Alumni>> GetAllAlumniByMajorIdAsync(int id);
         Task<IEnumerable<Alumni>> GetAllAlumniByDegreeAsync(Degree degree);
-        Task AddAlumniAsync(Alumni alumni);
-        Task AddCurrentYearAlumniAsync(IEnumerable<Alumni> alumniList);
-        Task UpdateAlumniAsync(Alumni alumni);
-        Task UpdateBatchAlumniAsync(IEnumerable<Alumni> alumniList);
-        Task DeleteAlumniAsync(int id);
-        Task DeleteBatchAlumniAsync(IEnumerable<int> idList);
+        Task<int> AddAlumniAsync(Alumni alumni);
+        Task<int> AddCurrentYearAlumniAsync(IEnumerable<Alumni> alumniList);
+        Task<int> UpdateAlumniAsync(Alumni alumni);
+        Task<int> BatchUpdateAlumniAsync(IEnumerable<Alumni> alumniList);
+        Task<int> DeleteAlumniAsync(int id);
+        Task<int> BatchDeleteAlumniAsync(IEnumerable<int> idList);
     }
 }

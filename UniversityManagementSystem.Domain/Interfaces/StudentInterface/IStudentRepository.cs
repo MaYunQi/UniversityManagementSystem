@@ -10,9 +10,9 @@ namespace UniversityManagementSystem.Domain.Interfaces.StudentInterface
         Task<IEnumerable<Student>> GetAllStudentsWithFacultyIdAsync(int facultyId);
         Task<IEnumerable<Student>> GetAllStudentsWithCourseIdAsync(int courseId);
         Task<IEnumerable<Student>> GetAllStudentsByDegree(Degree degree);
-        Task AddStudentAsync(Student student);
-        Task AddBatchStudentsAsync(IEnumerable<Student> students);
-        Task UpdateStudentAsync(Student student);
-        Task DeleteStudentAsync(int id);
+        Task<int> AddStudentAsync(Student student);
+        Task<int> BatchAddStudentsAsync(IEnumerable<Student> students);
+        Task<int> UpdateStudentAsync(Student student);
+        Task<int> DeleteStudentAsync(int id);
     }
 }
