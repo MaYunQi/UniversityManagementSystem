@@ -2,6 +2,7 @@
 using UniversityManagementSystem.Domain.Services.AlumniServices;
 using Moq;
 using UniversityManagementSystem.Domain.Entities.OtherEntity;
+
 namespace UniversityManagementSystem.UnitTest.DomainUnitTest
 {
     public class AlumniServiceUnitTest
@@ -171,6 +172,138 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int result = await _service.UpdateAlumniAsync(alumni);
             Assert.Equal(expectedResult, result);
             _mockRepository.Verify(repo => repo.UpdateAlumniAsync(alumni), Times.Once);
+        }
+        [Fact]
+        public async Task GetAllAlumniAsync_GetSuccess_ReturnList()
+        {
+            IEnumerable<Alumni> list = new List<Alumni>() 
+            {
+                new Alumni() {AlumniId = 1},
+                new Alumni() {AlumniId = 2},
+            };
+            _mockRepository.Setup(repo=>repo.GetAllAlumniAsync()).ReturnsAsync(list);
+
+            IEnumerable<Alumni> result = await _service.GetAllAlumniAsync();
+
+            Assert.NotNull(result);
+            Assert.True(list.SequenceEqual(result));
+            _mockRepository.Verify(repo => repo.GetAllAlumniAsync(),Times.Once);
+        }
+        [Fact]
+        public async Task GetAllAlumniAsync_GetError_ReturnNull()
+        {
+            _mockRepository.Setup(repo => repo.GetAllAlumniAsync()).ReturnsAsync((IEnumerable<Alumni >)null);
+
+            IEnumerable<Alumni> result = await _service.GetAllAlumniAsync();
+            Assert.Null(result);
+            _mockRepository.Verify(repo => repo.GetAllAlumniAsync(), Times.Once);
+        }
+        [Fact]
+        public async Task GetAllUndergraduateAlumniAsync_GetSuccess_ReturnList()
+        {
+            IEnumerable<Alumni> list = new List<Alumni>()
+            {
+                new Alumni() {AlumniId = 1,Degree=Degree.Bachelor},
+                new Alumni() {AlumniId = 2,Degree=Degree.Bachelor},
+            };
+            _mockRepository.Setup(repo => repo.GetAllAlumniByDegreeAsync(Degree.Bachelor)).ReturnsAsync(list);
+
+            IEnumerable<Alumni> result = await _service.GetAllUndergraduateAlumniAsync();
+
+            Assert.NotNull(result);
+            Assert.True(list.SequenceEqual(result));
+            _mockRepository.Verify(repo => repo.GetAllAlumniByDegreeAsync(Degree.Bachelor),Times.Once);
+        }
+        [Fact]
+        public async Task GetAllUndergraduateAlumniAsync_GetError_ReturnNull()
+        {
+            _mockRepository.Setup(repo => repo.GetAllAlumniByDegreeAsync(Degree.Bachelor)).ReturnsAsync((IEnumerable<Alumni>)null);
+
+            IEnumerable<Alumni> result = await _service.GetAllUndergraduateAlumniAsync();
+            Assert.Null(result);
+            _mockRepository.Verify(repo => repo.GetAllAlumniByDegreeAsync(Degree.Bachelor), Times.Once);
+        }
+        [Fact]
+        public async Task GetAllGraduateAlumniAsync_GetSuccess_ReturnList()
+        {
+            IEnumerable<Alumni> list = new List<Alumni>()
+            {
+                new Alumni() {AlumniId = 1,Degree=Degree.Master},
+                new Alumni() {AlumniId = 2,Degree=Degree.Master},
+            };
+            _mockRepository.Setup(repo => repo.GetAllAlumniByDegreeAsync(Degree.Master)).ReturnsAsync(list);
+
+            IEnumerable<Alumni> result = await _service.GetAllGraduateAlumniAsync();
+
+            Assert.NotNull(result);
+            Assert.True(list.SequenceEqual(result));
+            _mockRepository.Verify(repo => repo.GetAllAlumniByDegreeAsync(Degree.Master), Times.Once);
+        }
+        [Fact]
+        public async Task GetAllGraduateAlumniAsync_GetError_ReturnNull()
+        {
+            _mockRepository.Setup(repo => repo.GetAllAlumniByDegreeAsync(Degree.Master)).ReturnsAsync((IEnumerable<Alumni>)null);
+
+            IEnumerable<Alumni> result = await _service.GetAllGraduateAlumniAsync();
+            Assert.Null(result);
+            _mockRepository.Verify(repo => repo.GetAllAlumniByDegreeAsync(Degree.Master), Times.Once);
+        }
+        [Fact]
+        public async Task GetAllDoctoralAlumniAsync_GetSuccess_ReturnList()
+        {
+            IEnumerable<Alumni> list = new List<Alumni>()
+            {
+                new Alumni() {AlumniId = 1,Degree=Degree.PhD},
+                new Alumni() {AlumniId = 2,Degree=Degree.PhD},
+            };
+            _mockRepository.Setup(repo => repo.GetAllAlumniByDegreeAsync(Degree.PhD)).ReturnsAsync(list);
+
+            IEnumerable<Alumni> result = await _service.GetAllDoctoralAlumniAsync();
+
+            Assert.NotNull(result);
+            Assert.True(list.SequenceEqual(result));
+            _mockRepository.Verify(repo => repo.GetAllAlumniByDegreeAsync(Degree.PhD), Times.Once);
+        }
+        [Fact]
+        public async Task GetAllDoctoralAlumniAsync_GetError_ReturnNull()
+        {
+            _mockRepository.Setup(repo => repo.GetAllAlumniByDegreeAsync(Degree.PhD)).ReturnsAsync((IEnumerable<Alumni>)null);
+
+            IEnumerable<Alumni> result = await _service.GetAllDoctoralAlumniAsync();
+            Assert.Null(result);
+            _mockRepository.Verify(repo => repo.GetAllAlumniByDegreeAsync(Degree.PhD), Times.Once);
+        }
+        [Fact]
+        public async Task GetAllAlumniByYearAsync_InvalidYear_ReturnNull()
+        {
+            int year = -1;
+            IEnumerable<Alumni> list=await _service.GetAllAlumniByYearAsync(year);
+            Assert.Null(list);
+        }
+        [Fact]
+        public async Task GetAllAlumniByYearAsync_NotFound_ReturnNull()
+        {
+            int year =2020;
+            _mockRepository.Setup(repo=>repo.GetAllAlumniByYearAsync(year)).ReturnsAsync((IEnumerable<Alumni>)null);
+            IEnumerable<Alumni> list = await _service.GetAllAlumniByYearAsync(year);
+            Assert.Null(list);
+            _mockRepository.Verify(repo => repo.GetAllAlumniByYearAsync(year),Times.Once);
+        }
+        [Fact]
+        public async Task GetAllAlumniByYearAsync_GetSuccess_ReturnList()
+        {
+            int year = 2020;
+            IEnumerable<Alumni> list = new List<Alumni>()
+            {
+                new Alumni {AlumniId=1},
+                new Alumni {AlumniId=2}
+            };
+            _mockRepository.Setup(repo => repo.GetAllAlumniByYearAsync(year)).ReturnsAsync(list);
+
+            IEnumerable<Alumni> result = await _service.GetAllAlumniByYearAsync(year);
+
+            Assert.NotNull(result);
+            Assert.True(result.SequenceEqual(list));
         }
     }
 }

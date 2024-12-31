@@ -73,35 +73,45 @@ namespace UniversityManagementSystem.Domain.Services.AlumniServices
             }
             return result;
         }
-        public Task<int> AddCurrentYearAlumniAsync(IEnumerable<Alumni> alumniList)
+        public async Task<IEnumerable<Alumni>> GetAllAlumniAsync()
+        {
+            return await _alumniRepository.GetAllAlumniAsync();
+        }
+        public async Task<IEnumerable<Alumni>> GetAllUndergraduateAlumniAsync()
+        {
+            return await _alumniRepository.GetAllAlumniByDegreeAsync(Degree.Bachelor);
+        }
+        public async Task<IEnumerable<Alumni>> GetAllGraduateAlumniAsync()
+        {
+            return await _alumniRepository.GetAllAlumniByDegreeAsync(Degree.Master);
+        }
+        public async Task<IEnumerable<Alumni>> GetAllDoctoralAlumniAsync()
+        {
+            return await _alumniRepository.GetAllAlumniByDegreeAsync(Degree.PhD);
+        }
+        public async Task<IEnumerable<Alumni>> GetAllAlumniByYearAsync(int year)
+        {
+            if (year < 0 || year > DateTime.Now.Year)
+                return null;
+            return await _alumniRepository.GetAllAlumniByYearAsync(year);
+        }
+        public async Task<IEnumerable<Alumni>> GetAllAlumniByMajorIdAsync(int id)
         {
             throw new NotImplementedException();
         }
-        public Task<int> BatchUpdateAlumniAsync(IEnumerable<Alumni> alumniList)
+        public async Task<IEnumerable<Alumni>> GetAllAlumniByFacultyIdAsync(int id)
         {
             throw new NotImplementedException();
         }
-        public Task<int> BatchDeleteAlumniAsync(IEnumerable<int> idList)
+        public async Task<int> AddCurrentYearAlumniAsync(IEnumerable<Alumni> alumniList)
         {
             throw new NotImplementedException();
         }
-
-        public Task<IEnumerable<Alumni>> GetAllAlumniAsync()
+        public async Task<int> BatchUpdateAlumniAsync(IEnumerable<Alumni> alumniList)
         {
             throw new NotImplementedException();
         }
-
-        public Task<IEnumerable<Alumni>> GetAllAlumniByDegreeAsync(Degree degree)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Alumni>> GetAllAlumniByMajorIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Alumni>> GetAllAlumniByYearAsync(int year)
+        public async Task<int> BatchDeleteAlumniAsync(IEnumerable<int> idList)
         {
             throw new NotImplementedException();
         }

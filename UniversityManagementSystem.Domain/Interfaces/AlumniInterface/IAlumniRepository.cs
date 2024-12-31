@@ -9,6 +9,7 @@ namespace UniversityManagementSystem.Domain.Interfaces.AlumniInterface
         Task<IEnumerable<Alumni>> GetAllAlumniAsync();
         Task<IEnumerable<Alumni>> GetAllAlumniByYearAsync(int year);
         Task<IEnumerable<Alumni>> GetAllAlumniByMajorIdAsync(int id);
+        Task<IEnumerable<Alumni>> GetAllAlumniByFacultyIdAsync(int id);
         Task<IEnumerable<Alumni>> GetAllAlumniByDegreeAsync(Degree degree);
         Task<int> AddAlumniAsync(Alumni alumni);
         Task<int> BatchAddAlumniAsync(IEnumerable<Alumni> alumniList);
