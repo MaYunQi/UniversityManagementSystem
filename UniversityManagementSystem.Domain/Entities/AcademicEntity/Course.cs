@@ -2,12 +2,21 @@
 
 namespace UniversityManagementSystem.Domain.Entities.AcademicEntity
 {
-    public class Course
+    public class Course:BaseEntity
     {
-        public int CourseId { get; set; }
+        public short CourseId { get; private set; }
+        public Guid Guid { get; private set; }
+        public string CourseCode { get; private set; }
         public string Name { get; set; }
-        public RegisterationType RegisterationType { get; set; }
-        public int FacultiId { get; set; }
-        public int MajorId {  get; set; }
+        public sbyte Credit { get; private set; }
+        public string Semester { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public string Schedule { get; set; }
+        public sbyte MaxStudents { get; set; }
+        public sbyte CurrentEnrollment { get; set; }
+        public List<string>? Prerequisities { get; set; }
+        public short FacultyId { get; private set; }
+        public short MajorId {  get; private set; }
     }
 }

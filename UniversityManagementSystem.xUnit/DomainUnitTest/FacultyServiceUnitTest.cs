@@ -27,8 +27,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         {
             IEnumerable<Faculty> list = new List<Faculty>()
             {
-                new Faculty() {FacultyId=1},
-                new Faculty() {FacultyId=2},
+                new Faculty() {Name = "TEST1"},
+                new Faculty() {Name="TEST2"},
             };
             _mockRepository.Setup(repo => repo.GetAllFacultiesAsync()).ReturnsAsync(list);
 
@@ -59,7 +59,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task GetFacultyById_Found_ReturnFaculty()
         {
             int id = 1;
-            Faculty faculty = new Faculty() { FacultyId = 1 };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _mockRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
 
             Faculty result = await _facultyService.GetFacultyByIdAsync(id);
@@ -79,7 +79,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddFacultyAsync_Exsit_ReturnMinusOne()
         {
             int expected = -1;
-            Faculty faculty = new Faculty() { FacultyId=1};
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _mockRepository.Setup(repo=>repo.AddFacultyAsync(faculty)).ReturnsAsync(0);
             _mockRepository.Setup(repo=>repo.GetFacultyByIdAsync(faculty.FacultyId)).ReturnsAsync(faculty);
 
@@ -91,7 +91,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddFacultyAsync_AddError_ReturnZero()
         {
             int expected = 0;
-            Faculty faculty = new Faculty() { FacultyId = 1 };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _mockRepository.Setup(repo => repo.AddFacultyAsync(faculty)).ReturnsAsync(0);
             _mockRepository.Setup(repo => repo.GetFacultyByIdAsync(faculty.FacultyId)).ReturnsAsync((Faculty)null);
 
@@ -103,7 +103,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddFacultyAsync_AddSuccess_ReturnOne()
         {
             int expected = 1;
-            Faculty faculty = new Faculty() { FacultyId = 1 };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _mockRepository.Setup(repo => repo.AddFacultyAsync(faculty)).ReturnsAsync(expected);
 
             int result = await _facultyService.AddFacultyAsync(faculty);
@@ -166,7 +166,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task UpdateFacultyAsync_FacultyNotFound_ReturnMinusOne()
         {
             int expected = -1;
-            Faculty faculty = new Faculty() { FacultyId=1};
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _mockRepository.Setup(repo => repo.UpdateFacultyAsync(faculty)).ReturnsAsync(0);
             _mockRepository.Setup(repo =>repo.GetFacultyByIdAsync(faculty.FacultyId)).ReturnsAsync((Faculty)null);
 
@@ -178,7 +178,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task UpdateFacultyAsync_DeleteError_ReturnZero()
         {
             int expected =0;
-            Faculty faculty = new Faculty() { FacultyId = 1 };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _mockRepository.Setup(repo => repo.UpdateFacultyAsync(faculty)).ReturnsAsync(0);
             _mockRepository.Setup(repo => repo.GetFacultyByIdAsync(faculty.FacultyId)).ReturnsAsync(faculty);
 
@@ -190,7 +190,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task UpdateFacultyAsync_DeleteSuccess_ReturnOne()
         {
             int expected = 1;
-            Faculty faculty = new Faculty() { FacultyId = 1 }; 
+            Faculty faculty = new Faculty() { Name = "TEST" }; 
             _mockRepository.Setup(repo => repo.UpdateFacultyAsync(faculty)).ReturnsAsync(1);
 
             int result = await _facultyService.UpdateFacultyAsync(faculty);

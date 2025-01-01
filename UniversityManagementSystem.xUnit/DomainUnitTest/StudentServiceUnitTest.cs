@@ -39,7 +39,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task GetStudentByIdAsync_StudentFound_ReturnInstance()
         {
             int id = 1;
-            Student expectedStu = new Student() { StudentId = 1, Name = "Test" };
+            Student expectedStu = new Student() { Name = "Test" };
             _MockStudentRepository.Setup(repo => repo.GetStudentByIdAsync(id)).ReturnsAsync(expectedStu);
 
             Student result = await _studentService.GetStudentByIdAsync(id);
@@ -70,7 +70,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task UpdateStudentAsync_StudentNoFound_ReturnMinusOne()
         {
             int expectedResult = -1;
-            Student student = new Student() { StudentId = 1 };
+            Student student = new Student() { Name = "TEST" };
             _MockStudentRepository.Setup(repo => repo.UpdateStudentAsync(student)).ReturnsAsync(0);
             _MockStudentRepository.Setup(repo => repo.GetStudentByIdAsync(student.StudentId)).ReturnsAsync((Student)null);
 
@@ -82,7 +82,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task UpdateStudentAsync_UpdateError_ReturnZero()
         {
             int expectedResult = 0;
-            Student student = new Student() { StudentId = 1 };
+            Student student = new Student() { Name = "TEST" };
             _MockStudentRepository.Setup(repo => repo.UpdateStudentAsync(student)).ReturnsAsync(0);
             _MockStudentRepository.Setup(repo => repo.GetStudentByIdAsync(student.StudentId)).ReturnsAsync(student);
 
@@ -94,7 +94,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task UpdateStudentAsync_UpdateSuccess_ReturnOne()
         {
             int expectedResult = 1;
-            Student student = new Student() { StudentId = 1 };
+            Student student = new Student() { Name = "TEST" };
             _MockStudentRepository.Setup(repo => repo.UpdateStudentAsync(student)).ReturnsAsync(expectedResult);
 
             int result = await _studentService.UpdateStudentAsync(student);
@@ -114,9 +114,9 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddStudentAsync_StudentExsits_ReturnMinusOne()
         {
             int expectedResult = -1;
-            Student student = new Student() { StudentId = 1 };
+            Student student = new Student() { Name = "TEST" };
             _MockStudentRepository.Setup(repo => repo.AddStudentAsync(student)).ReturnsAsync(0);
-            _MockStudentRepository.Setup(repo => repo.GetStudentByIdAsync(student.StudentId)).ReturnsAsync(new Student() { StudentId = 1 });
+            _MockStudentRepository.Setup(repo => repo.GetStudentByIdAsync(student.StudentId)).ReturnsAsync(new Student() { Name = "TEST" });
 
             int result = await _studentService.AddStudentAsync(student);
             Assert.Equal(expectedResult, result);
@@ -126,7 +126,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddStudentAsync_AddError_ReturnZero()
         {
             int expectedResult = 0;
-            Student student = new Student() { StudentId = 1 };
+            Student student = new Student() { Name = "TEST" };
             _MockStudentRepository.Setup(repo => repo.AddStudentAsync(student)).ReturnsAsync(0);
             _MockStudentRepository.Setup(repo => repo.GetStudentByIdAsync(student.StudentId)).ReturnsAsync((Student)null);
 
@@ -138,7 +138,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddStudentAsync_AddSuccess_ReturnOne()
         {
             int expectedResult = 1;
-            Student student = new Student() {StudentId = 1};
+            Student student = new Student() {Name="TEST"};
             _MockStudentRepository.Setup(repo => repo.AddStudentAsync(student)).ReturnsAsync(expectedResult);
 
             int result=await _studentService.AddStudentAsync(student);
@@ -173,7 +173,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int id = 0;
             int expectedResult = 0;
             _MockStudentRepository.Setup(repo => repo.DeleteStudentAsync(id)).ReturnsAsync(0);
-            _MockStudentRepository.Setup(repo => repo.GetStudentByIdAsync(id)).ReturnsAsync(new Student() { StudentId=1});
+            _MockStudentRepository.Setup(repo => repo.GetStudentByIdAsync(id)).ReturnsAsync(new Student() { Name = "TEST" });
 
             int result = await _studentService.DeleteStudentAsync(id);
             Assert.Equal(expectedResult, result);
@@ -195,8 +195,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         {
             List<Student> list= new List<Student>()
             {
-                new Student() { StudentId=1,Name="Test1" },
-                new Student() { StudentId=2,Name="Test2"}
+                new Student() { Name="Test1" },
+                new Student() { Name="Test2"}
             };
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsAsync()).ReturnsAsync(list);
 
@@ -226,8 +226,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         {
             IEnumerable<Student> students=new List<Student>() 
             { 
-                new Student() {StudentId=1},
-                new Student() {StudentId=2},
+                new Student() {Name="TEST1"},
+                new Student() {Name="TEST2"},
             };
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByDegreeAsync(Degree.Bachelor)).ReturnsAsync(students);
 
@@ -251,8 +251,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         {
             IEnumerable<Student> students = new List<Student>()
             {
-                new Student() {StudentId=1},
-                new Student() {StudentId=2},
+                new Student() {Name = "TEST1"},
+                new Student() {Name="TEST2"},
             };
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByDegreeAsync(Degree.Master)).ReturnsAsync(students);
 
@@ -276,8 +276,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         {
             IEnumerable<Student> students = new List<Student>()
             {
-                new Student() {StudentId=1},
-                new Student() {StudentId=2},
+                new Student() {Name="TEST"},
+                new Student() {Name="TEST"},
             };
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByDegreeAsync(Degree.PhD)).ReturnsAsync(students);
 
@@ -309,7 +309,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task GetAllStudentsByFacultyIdAsync_FacultyWithNoStudent_ReturnNull()
         {
             int id = 1;
-            Faculty faculty = new Faculty() { FacultyId=1 };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _MockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _MockStudentRepository.Setup(repo=>repo.GetAllStudentsByFacultyIdAsync(id)).ReturnsAsync((IEnumerable<Student>)null);
 
@@ -323,10 +323,10 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int id = 1;
             IEnumerable<Student> students = new List<Student>() 
             {
-                new Student() { StudentId=1 },
-                new Student() { StudentId=2 }
+                new Student() { Name="TEST1" },
+                new Student() { Name="TEST2" }
             };
-            Faculty faculty = new Faculty() { FacultyId=id};
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _MockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByFacultyIdAsync(id)).ReturnsAsync(students);
 
@@ -357,7 +357,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task GetAllUndergraduateStudentsByFacultyIdAsync_FacultyWithNoStudent_ReturnNull()
         {
             int id = 1;
-            Faculty faculty = new Faculty() { FacultyId = 1 };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _MockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByFacultyIdAsync(id)).ReturnsAsync((IEnumerable<Student>)null);
 
@@ -371,10 +371,10 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int id = 1;
             IEnumerable<Student> students = new List<Student>()
             {
-                new Student() { StudentId=1 , Degree=Degree.Bachelor },
-                new Student() { StudentId=2 , Degree=Degree.Bachelor}
+                new Student() {  Degree=Degree.Bachelor },
+                new Student() {  Degree=Degree.Bachelor}
             };
-            Faculty faculty = new Faculty() { FacultyId = id };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _MockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByFacultyIdAsync(id)).ReturnsAsync(students);
 
@@ -405,7 +405,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task GetAllGraduateStudentsByFacultyIdAsync_FacultyWithNoStudent_ReturnNull()
         {
             int id = 1;
-            Faculty faculty = new Faculty() { FacultyId = 1 };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _MockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByFacultyIdAsync(id)).ReturnsAsync((IEnumerable<Student>)null);
 
@@ -419,10 +419,10 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int id = 1;
             IEnumerable<Student> students = new List<Student>()
             {
-                new Student() { StudentId=1 , Degree=Degree.Master},
-                new Student() { StudentId=2 , Degree=Degree.Master}
+                new Student() { Degree=Degree.Master},
+                new Student() { Degree=Degree.Master}
             };
-            Faculty faculty = new Faculty() { FacultyId = id };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _MockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByFacultyIdAsync(id)).ReturnsAsync(students);
 
@@ -453,7 +453,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task GetAllDoctoralStudentsByFacultyIdAsync_FacultyWithNoStudent_ReturnNull()
         {
             int id = 1;
-            Faculty faculty = new Faculty() { FacultyId = 1 };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _MockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByFacultyIdAsync(id)).ReturnsAsync((IEnumerable<Student>)null);
 
@@ -467,10 +467,10 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int id = 1;
             IEnumerable<Student> students = new List<Student>()
             {
-                new Student() { StudentId=1 , Degree=Degree.PhD},
-                new Student() { StudentId=2 , Degree=Degree.PhD}
+                new Student() {  Degree=Degree.PhD},
+                new Student() {  Degree=Degree.PhD}
             };
-            Faculty faculty = new Faculty() { FacultyId = id };
+            Faculty faculty = new Faculty() { Name = "TEST" };
             _MockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _MockStudentRepository.Setup(repo => repo.GetAllStudentsByFacultyIdAsync(id)).ReturnsAsync(students);
 

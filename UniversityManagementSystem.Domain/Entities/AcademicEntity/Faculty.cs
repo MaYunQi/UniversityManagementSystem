@@ -1,8 +1,11 @@
-﻿namespace UniversityManagementSystem.Domain.Entities.AcademicEntity
+﻿using UniversityManagementSystem.Domain.Entities.OtherEntity;
+
+namespace UniversityManagementSystem.Domain.Entities.AcademicEntity
 {
-    public class Faculty
+    public class Faculty : BaseEntity
     {
-        public int FacultyId { get; set; }
+        public short FacultyId { get; private set; }
+        public Guid Guid { get; private set; }
         public string Name { get; set; }
     }
 }

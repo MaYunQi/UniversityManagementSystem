@@ -1,4 +1,6 @@
 ﻿
+using UniversityManagementSystem.Domain.Entities.AcademicEntity;
+using UniversityManagementSystem.Domain.Entities.OtherEntity;
 using UniversityManagementSystem.Domain.Entities.StaffEntity;
 using UniversityManagementSystem.Domain.Interfaces.AcademicInterface;
 using UniversityManagementSystem.Domain.Interfaces.StaffInterface;
@@ -30,49 +32,83 @@ namespace UniversityManagementSystem.Domain.Services.StaffServices
             return result;
         }
 
-        public Task<int> DeleteStaffAsync(int id)
+        public async Task<int> DeleteStaffAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id < 0)
+                return -1;
+            int result=await _staffRepository.DeleteStaffAsync(id);
+            if(result==0)
+            {
+                Staff local = await _staffRepository.GetStaffByIdAsync(id);
+                if (local != null)
+                    return 0;
+                else 
+                    return -1;
+            }
+            return result;
+        }
+        public async Task<IEnumerable<Staff>> GetAllStaffAsync()
+        {
+            return await _staffRepository.GetAllStaffAsync();
+        }
+        public async Task<IEnumerable<Staff>> GetAllStaffByStaffTypeAsync(StaffType type)
+        {
+            IEnumerable<Staff> staffs = await _staffRepository.GetAllStaffByStaffTypeAsync(type);
+            return staffs;
+        }
+        public async Task<IEnumerable<Staff>> GetAllAcademicStaffAsync()
+        {
+            return await GetAllStaffByStaffTypeAsync(StaffType.Academic);
         }
 
-        public Task<IEnumerable<Staff>> GetAllAcademicStaffAsync()
+        public async Task<IEnumerable<Staff>> GetAllAdministrativeStaffAsync()
         {
-            throw new NotImplementedException();
+            return await GetAllStaffByStaffTypeAsync(StaffType.Administrative);
         }
 
-        public Task<IEnumerable<Staff>> GetAllAdministrativeStaffAsync()
+        public async Task<IEnumerable<Staff>> GetAllLogisticStaffAsync()
         {
-            throw new NotImplementedException();
+            return await GetAllStaffByStaffTypeAsync(StaffType.Logistic);
         }
 
-        public Task<IEnumerable<Staff>> GetAllLogisticStaffAsync()
+        public async Task<IEnumerable<Staff>> GetAllOtherStaffAsync()
         {
-            throw new NotImplementedException();
+            return await GetAllStaffByStaffTypeAsync(StaffType.Other);
         }
 
-        public Task<IEnumerable<Staff>> GetAllOtherStaffAsync()
+        public async Task<IEnumerable<Staff>> GetAllStaffByFacultyIdAsync(int facultyId)
         {
-            throw new NotImplementedException();
+            if (facultyId < 0)
+                return null;
+            Faculty faculty= await _facultyRepository.GetFacultyByIdAsync(facultyId);
+            if(faculty!=null)
+            {
+                return await _staffRepository.GetAllStaffByFacultyIdAsync(facultyId);
+            }
+            return null;
         }
 
-        public Task<IEnumerable<Staff>> GetAllStaffAsync()
+        public async Task<Staff> GetStaffByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            if (id < 0)
+                return null;
+            return await _staffRepository.GetStaffByIdAsync(id);
         }
 
-        public Task<IEnumerable<Staff>> GetAllStaffByFacultyIdAsync(int facultyId)
+        public async Task<int> UpdateStaffAsync(Staff staff)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Staff> GetStaffByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> UpdateStaffAsync(Staff staff)
-        {
-            throw new NotImplementedException();
+            if (staff == null)
+                return -1;
+            int result=await _staffRepository.UpdateStaffAsync(staff);
+            if (result == 0)
+            {
+                Staff local = await _staffRepository.GetStaffByIdAsync(staff.StaffId);
+                if (local != null)
+                    return 0;
+                else
+                    return -1;
+            }
+            return result;
         }
     }
 }

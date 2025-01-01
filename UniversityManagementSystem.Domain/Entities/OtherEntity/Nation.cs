@@ -1,8 +1,9 @@
 ﻿namespace UniversityManagementSystem.Domain.Entities.OtherEntity
 {
-    public class Nation
+    public class Nation : BaseEntity
     {
-        public int NationId { get; set; }
+        public short NationId { get; private set; }
+        public Guid Guid { get; private set; }
         public string Name { get; set; }
     }
 }
