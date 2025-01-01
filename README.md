@@ -27,4 +27,3 @@ Moq
 
 ***
 
-**Need front end developer to design and implement the UI**
