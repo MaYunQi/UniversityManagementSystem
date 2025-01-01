@@ -19,5 +19,6 @@ namespace UniversityManagementSystem.Domain.Interfaces.StudentInterface
         Task<IEnumerable<Student>> GetAllGraduateStudentsByFacultyIdAsync(int facultyId);
         Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(int facultyId);
         Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(int courseId);
+        Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(int majorId);
     }
 }

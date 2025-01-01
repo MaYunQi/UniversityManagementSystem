@@ -1,5 +1,3 @@
-using UniversityManagementSystem.UI.Constraints;
-using UniversityManagementSystem.UI.Middlewares;
 
 namespace UniversityManagementSystem.UI
 {
@@ -8,6 +6,9 @@ namespace UniversityManagementSystem.UI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

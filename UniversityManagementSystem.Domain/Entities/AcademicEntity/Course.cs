@@ -4,7 +4,7 @@ namespace UniversityManagementSystem.Domain.Entities.AcademicEntity
 {
     public class Course:BaseEntity
     {
-        public short CourseId { get; private set; }
+        public ushort CourseId { get; private set; }
         public Guid Guid { get; private set; }
         public string CourseCode { get; private set; }
         public string Name { get; set; }
@@ -16,7 +16,7 @@ namespace UniversityManagementSystem.Domain.Entities.AcademicEntity
         public sbyte MaxStudents { get; set; }
         public sbyte CurrentEnrollment { get; set; }
         public List<string>? Prerequisities { get; set; }
-        public short FacultyId { get; private set; }
-        public short MajorId {  get; private set; }
+        public sbyte FacultyId { get; private set; }
+        public ushort MajorId {  get; private set; }
     }
 }

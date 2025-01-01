@@ -7,10 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DbContexts\" />
     <Folder Include="Configurations\" />
     <Folder Include="Services\" />
     <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UniversityManagementSystem.Domain\UniversityManagementSystem.Domain.csproj" />
   </ItemGroup>
 
 </Project>

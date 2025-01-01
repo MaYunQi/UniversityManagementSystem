@@ -75,8 +75,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
 
         public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
-            IEnumerable<Student> stuList = await _studentRepository.GetAllStudentsAsync();
-            return stuList;
+            return await _studentRepository.GetAllStudentsAsync();
         }
         
         public async Task<IEnumerable<Student>> GetAllUndergraduateStudentsAsync()
@@ -93,6 +92,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
         {
             return await _studentRepository.GetAllStudentsByDegreeAsync(Degree.PhD);
         }
+
         public async Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(int facultyId)
         {
             if (facultyId < 0)
@@ -102,6 +102,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
                 return null;
             return await _studentRepository.GetAllStudentsByFacultyIdAsync(facultyId);
         }
+
         public async Task<IEnumerable<Student>> GetAllUndergraduateStudentsByFacultyIdAsync(int facultyId)
         {
             IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
@@ -109,6 +110,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
                 return null;
             return allStudents.Where(stu => stu.Degree == Degree.Bachelor).ToList();
         }
+
         public async Task<IEnumerable<Student>> GetAllGraduateStudentsByFacultyIdAsync(int facultyId)
         {
             IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
@@ -116,6 +118,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
                 return null;
             return allStudents.Where(stu => stu.Degree == Degree.Master).ToList();
         }
+
         public async Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(int facultyId)
         {
             IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
@@ -123,7 +126,13 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
                 return null;
             return allStudents.Where(stu => stu.Degree == Degree.PhD).ToList();
         }
+
         public Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(int courseId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(int majorId)
         {
             throw new NotImplementedException();
         }

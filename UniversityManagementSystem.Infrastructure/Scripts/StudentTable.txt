@@ -1,0 +1,21 @@
+﻿create table Students(
+    Id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    StudentId INT UNSIGNED NOT NULL,
+    Guid CHAR(36) NOT NULL,
+    FirstName VARCHAR(255) NOT NULL,
+    MiddleName VARCHAR(255),
+    LastName VARCHAR(255) NOT NULL,
+    Gender VARCHAR(20) NOT NULL,
+    Email VARCHAR(255) ,
+    NationId TINYINT UNSIGNED NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    EnrollmentDate DATE ,
+    PhoneNo VARCHAR(255),
+    Address VARCHAR(255),
+    FacultyId TINYINT UNSIGNED NOT NULL,
+    MajorId SMALLINT UNSIGNED NOT NULL,
+    Degree VARCHAR(255) NOT NULL,
+    SupervisorId SMALLINT UNSIGNED,
+    ResearchTopic VARCHAR(255),
+    DissertationTopic VARCHAR(255)
+)

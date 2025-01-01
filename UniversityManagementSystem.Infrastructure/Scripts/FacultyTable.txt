@@ -1,0 +1,9 @@
+﻿create table Faculties(
+    Id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    FacultyId TINYINT UNSIGNED NOT NULL,
+    Guid CHAR(36) NOT NULL,
+    Name VARCHAR(255) NOT NULL,
+    Abbreviation VARCHAR(50) NOT NULL,
+    DeanId SMALLINT UNSIGNED NOT NULL,
+    EstablishedDate DATE NOT NULL
+)

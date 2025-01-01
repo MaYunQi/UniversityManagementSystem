@@ -11,42 +11,72 @@ namespace UniversityManagementSystem.Domain.Services.AcademicServices
         {
             _courseRepository= courseRepository;
         }
-        public Task<int> AddCourseAsync(Course course)
+        public async Task<int> AddCourseAsync(Course course)
+        {
+            if (course == null)
+                return -1;
+            int result = await _courseRepository.AddCourseAsync(course);
+            if (result == 0)
+            {
+                Course local= await _courseRepository.GetCourseByCourseIdAsync(course.CourseId);
+                if (local == null)
+                    return 0;
+                else
+                    return -1;
+            }
+            return result;
+        }
+
+        public async Task<int> DeleteCourseAsync(int courseId)
+        {
+            if (courseId < 0)
+                return -1;
+            int result = await _courseRepository.DeleteCourseAsync(courseId);
+            if (result == 0)
+            {
+                Course local = await _courseRepository.GetCourseByCourseIdAsync(courseId);
+                if (local == null)
+                    return -1;
+                else
+                    return 0;
+            }
+            return result;
+        }
+        public async Task<int> UpdateCourseAsync(Course course)
+        {
+            if(course==null)
+                return -1;
+            int result = await _courseRepository.UpdateCourseAsync(course);
+            if (result == 0)
+            {
+                Course local = await _courseRepository.GetCourseByCourseIdAsync(course.CourseId);
+                if (local == null)
+                    return -1;
+                else
+                    return 0;
+            }
+            return result;
+        }
+        public async Task<Course> GetCourseByCourseCodeAsync(string code)
+        {
+            return await _courseRepository.GetCourseByCourseCodeAsync(code);
+        }
+
+        public async Task<Course> GetCourseByCourseIdAsync(int courseId)
+        {
+            return await _courseRepository.GetCourseByCourseIdAsync(courseId);
+        }
+        public async Task<IEnumerable<Course>> GetAllCoursesAsync()
+        {
+            return await _courseRepository.GetAllCoursesAsync();
+        }
+
+        public async Task<IEnumerable<Course>> GetAllCoursesByFacultyIdAsync(int facultId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> DeleteCourseAsync(int courseId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Course>> GetAllCoursesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Course>> GetAllCoursesByFacultyIdAsync(int facultId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Course>> GetAllCoursesByMajorIdAsync(int majorId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Course> GetCourseByCourseCodeAsync(string code)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Course> GetCourseByCourseIdAsync(int courseId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> UpdateCourseAsync(Course course)
+        public async Task<IEnumerable<Course>> GetAllCoursesByMajorIdAsync(int majorId)
         {
             throw new NotImplementedException();
         }
