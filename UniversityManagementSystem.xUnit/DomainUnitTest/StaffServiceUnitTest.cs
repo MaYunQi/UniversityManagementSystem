@@ -30,7 +30,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddStaffAsync_StaffExsit_ReturnMinusOne()
         {
             int expected = -1;
-            Staff staff = new Staff() { Name="Test"};
+            Staff staff = new Staff() { FirstName = "Test"};
             _MockStaffRepository.Setup(repo=>repo.AddStaffAsync(staff)).ReturnsAsync(0);
             _MockStaffRepository.Setup(repo=>repo.GetStaffByIdAsync(staff.StaffId)).ReturnsAsync(staff);
 
@@ -42,7 +42,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddStaffAsync_AddError_ReturnZero()
         {
             int expected = 0;
-            Staff staff = new Staff() { Name = "TEST" };
+            Staff staff = new Staff() { FirstName = "TEST" };
             _MockStaffRepository.Setup(repo => repo.AddStaffAsync(staff)).ReturnsAsync(0);
             _MockStaffRepository.Setup(repo => repo.GetStaffByIdAsync(staff.StaffId)).ReturnsAsync((Staff)null);
 
@@ -54,7 +54,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task AddStaffAsync_AddSuccess_ReturnOne()
         {
             int expected = 1;
-            Staff staff = new Staff() { Name = "TEST" };
+            Staff staff = new Staff() { FirstName = "TEST" };
             _MockStaffRepository.Setup(repo => repo.AddStaffAsync(staff)).ReturnsAsync(1);
 
             int result = await _staffService.AddStaffAsync(staff);
@@ -87,7 +87,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int id = 1;
             int expected =0;
             _MockStaffRepository.Setup(repo => repo.DeleteStaffAsync(id)).ReturnsAsync(0);
-            _MockStaffRepository.Setup(repo => repo.GetStaffByIdAsync(id)).ReturnsAsync(new Staff() { Name = "TEST" });
+            _MockStaffRepository.Setup(repo => repo.GetStaffByIdAsync(id)).ReturnsAsync(new Staff() { FirstName = "TEST" });
 
             int result = await _staffService.DeleteStaffAsync(id);
             Assert.Equal(expected, result);
@@ -126,7 +126,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task GetStaffByIdAsync_Found_ReturnStaff()
         {
             int id = 1;
-            Staff staff=new Staff() { Name = "TEST" };
+            Staff staff=new Staff() { FirstName = "TEST" };
             _MockStaffRepository.Setup(repo => repo.GetStaffByIdAsync(id)).ReturnsAsync(staff);
             Staff result = await _staffService.GetStaffByIdAsync(id);
             Assert.NotNull(result);
@@ -144,7 +144,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         [Fact]
         public async Task UpdateStaffAsync_StaffNotFound_ReturnMinusOne()
         {
-            Staff staff=new Staff() { Name = "TEST" };
+            Staff staff=new Staff() { FirstName = "TEST" };
             _MockStaffRepository.Setup(re=>re.UpdateStaffAsync(staff)).ReturnsAsync(0);
             _MockStaffRepository.Setup(re => re.GetStaffByIdAsync(staff.StaffId)).ReturnsAsync((Staff)null);
 
@@ -155,7 +155,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         [Fact]
         public async Task UpdateStaffAsync_UpdateError_ReturnZero()
         {
-            Staff staff = new Staff() { Name = "TEST" };
+            Staff staff = new Staff() { FirstName = "TEST" };
             _MockStaffRepository.Setup(re => re.UpdateStaffAsync(staff)).ReturnsAsync(0);
             _MockStaffRepository.Setup(re => re.GetStaffByIdAsync(staff.StaffId)).ReturnsAsync(new Staff());
 
@@ -166,7 +166,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         [Fact]
         public async Task UpdateStaffAsync_UpdateSuccess_ReturnOne()
         {
-            Staff staff = new Staff() { Name = "TEST" };
+            Staff staff = new Staff() { FirstName = "TEST" };
             _MockStaffRepository.Setup(re => re.UpdateStaffAsync(staff)).ReturnsAsync(1);
 
             int result = await (_staffService.UpdateStaffAsync(staff));
@@ -187,8 +187,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         {
             IEnumerable<Staff> staff=new List<Staff>() 
             {
-                new Staff() { Name="TEST1" },
-                new Staff() { Name="TEST2"},
+                new Staff() { FirstName="TEST1" },
+                new Staff() { FirstName="TEST2"},
             };
             _MockStaffRepository.Setup(repo => repo.GetAllStaffAsync()).ReturnsAsync(staff);
 

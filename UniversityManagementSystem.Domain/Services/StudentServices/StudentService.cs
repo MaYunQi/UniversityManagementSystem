@@ -1,4 +1,5 @@
 ﻿
+using System.Text;
 using UniversityManagementSystem.Domain.Entities.AcademicEntity;
 using UniversityManagementSystem.Domain.Entities.OtherEntity;
 using UniversityManagementSystem.Domain.Entities.StudentEntity;
@@ -16,7 +17,6 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             _studentRepository = studentRepository;
             _facultyRepository=facultyRepository;
         }
-
         public async Task<Student> GetStudentByIdAsync(int id)
         {
             if (id < 0)
@@ -24,7 +24,6 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             Student student=await _studentRepository.GetStudentByIdAsync(id);
             return student;
         }
-
         public async Task<int> UpdateStudentAsync(Student student)
         {
             if (student == null)
@@ -132,9 +131,19 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(int majorId)
+        public async Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(int majorId)
         {
-            throw new NotImplementedException();
+            return await _studentRepository.GetAllStudentsByMajorIdAsync(majorId);
+        }
+
+        public async Task<Student> GetStudentByStudentIdAsync(int studentId)
+        {
+            return await _studentRepository.GetStudentByStudentIdAsync(studentId);
+        }
+
+        public async Task<int> GetLastStudentIdByFacultyIdAsync(int facultyId,Degree degree)
+        {
+            return await _studentRepository.GetLastStudentIdByFacultyIdAndDegreeAsync(facultyId, degree);
         }
     }
 }

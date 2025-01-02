@@ -25,14 +25,14 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         public async Task GetAlumniByIdAsync_ValidId_ReturnsAlumni()
         {
             var id = 1;
-            Alumni expectedAlumni=new Alumni { Name="John Wick"};
+            Alumni expectedAlumni=new Alumni { FirstName = "John Wick"};
             _mockAlumniRepository.Setup(repo=>repo.GetAlumniByIdAsync(id)).ReturnsAsync(expectedAlumni);
 
             Alumni result = await _alumniService.GetAlumniByIdAsync(id);
 
             Assert.NotNull(result);
             Assert.Equal(expectedAlumni.AlumniId,result.AlumniId);
-            Assert.Equal(expectedAlumni.Name,result.Name);
+            Assert.Equal(expectedAlumni.FirstName, result.FirstName);
 
             _mockAlumniRepository.Verify(repo=>repo.GetAlumniByIdAsync(id),Times.Once);
         }
@@ -142,7 +142,7 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int expectedResult = -1;
             Alumni alumni = new Alumni()
             {
-                Name = "Test"
+                FirstName = "Test"
             };
             _mockAlumniRepository.Setup(repo=>repo.UpdateAlumniAsync(alumni)).ReturnsAsync(0);
             _mockAlumniRepository.Setup(repo=>repo.GetAlumniByIdAsync(alumni.AlumniId)).ReturnsAsync((Alumni)null);
@@ -185,8 +185,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
         {
             IEnumerable<Alumni> list = new List<Alumni>() 
             {
-                new Alumni() {Name = "Test1"},
-                new Alumni() {Name = "Test2"},
+                new Alumni() {FirstName = "Test1"},
+                new Alumni() {FirstName = "Test2"},
             };
             _mockAlumniRepository.Setup(repo=>repo.GetAllAlumniAsync()).ReturnsAsync(list);
 
@@ -302,8 +302,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             int year = 2020;
             IEnumerable<Alumni> list = new List<Alumni>()
             {
-                new Alumni {Name = "Test1"},
-                new Alumni {Name = "Test2"}
+                new Alumni {FirstName = "Test1"},
+                new Alumni {FirstName = "Test2"}
             };
             _mockAlumniRepository.Setup(repo => repo.GetAllAlumniByYearAsync(year)).ReturnsAsync(list);
 
@@ -350,8 +350,8 @@ namespace UniversityManagementSystem.UnitTest.DomainUnitTest
             Faculty faculty = new Faculty() { Name = "TEST" };
             IEnumerable<Alumni> alumnis = new List<Alumni>() 
             {
-                new Alumni() { Name="TEST"},
-                new Alumni() { Name="TEST"}
+                new Alumni() { FirstName="TEST"},
+                new Alumni() { FirstName="TEST"}
             };
             _mockFacultyRepository.Setup(repo => repo.GetFacultyByIdAsync(id)).ReturnsAsync(faculty);
             _mockAlumniRepository.Setup(repo => repo.GetAllAlumniByFacultyIdAsync(id)).ReturnsAsync(alumnis);

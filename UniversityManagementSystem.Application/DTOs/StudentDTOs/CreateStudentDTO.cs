@@ -1,11 +1,12 @@
-﻿using UniversityManagementSystem.Domain.Entities.OtherEntity;
+﻿
+using UniversityManagementSystem.Domain.Entities.OtherEntity;
 
-namespace UniversityManagementSystem.Domain.Entities.StudentEntity
+namespace UniversityManagementSystem.Application.DTOs.StudentDTOs
 {
-    public class Student : BaseEntity
+    public class CreateStudentDTO
     {
-        public int StudentId { get;  set; }
-        public Guid Guid { get;  set; }
+        public int StudentId { get; set; }
+        public Guid Guid { get; set; }
         public string FirstName { get; set; }
         public string? MiddleName { get; set; }
         public string LastName { get; set; }
@@ -19,8 +20,5 @@ namespace UniversityManagementSystem.Domain.Entities.StudentEntity
         public sbyte FacultyId { get; set; }
         public ushort MajorId { get; set; }
         public Degree Degree { get; set; }
-        public int? SupervisorId { get; set; }
-        public string? ResearchTopic { get; set; }
-        public string? DissertationTopic { get; set; }
     }
 }

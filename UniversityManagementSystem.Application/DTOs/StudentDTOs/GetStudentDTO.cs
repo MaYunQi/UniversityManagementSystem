@@ -1,11 +1,12 @@
-﻿using UniversityManagementSystem.Domain.Entities.OtherEntity;
+﻿
+using UniversityManagementSystem.Domain.Entities.OtherEntity;
 
-namespace UniversityManagementSystem.Domain.Entities.StudentEntity
+namespace UniversityManagementSystem.Application.DTOs.StudentDTOs
 {
-    public class Student : BaseEntity
+    public class GetStudentDTO
     {
-        public int StudentId { get;  set; }
-        public Guid Guid { get;  set; }
+        public int StudentId { get; set; }
+        public Guid Guid { get; set; }
         public string FirstName { get; set; }
         public string? MiddleName { get; set; }
         public string LastName { get; set; }

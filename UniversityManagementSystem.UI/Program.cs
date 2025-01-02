@@ -1,4 +1,8 @@
 
+using Microsoft.EntityFrameworkCore;
+using UniversityManagementSystem.Application.Mappings;
+using UniversityManagementSystem.Infrastructure.DbContexts;
+
 namespace UniversityManagementSystem.UI
 {
     public class Program
@@ -7,9 +11,16 @@ namespace UniversityManagementSystem.UI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
+            builder.Services.AddDbContext<WebApplicationDBContext>(options => options.UseMySql(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                new MySqlServerVersion(new Version(8,0,40))));
+           
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<StudentProfile>();
+            });
 
             var app = builder.Build();
 
@@ -20,6 +31,7 @@ namespace UniversityManagementSystem.UI
             app.UseStaticFiles();
             app.UseRouting();
             app.MapControllers();
+
             app.Run();
         }
     }

@@ -17,6 +17,6 @@ namespace UniversityManagementSystem.Domain.Entities.AcademicEntity
         public sbyte CurrentEnrollment { get; set; }
         public List<string>? Prerequisities { get; set; }
         public sbyte FacultyId { get; private set; }
-        public ushort MajorId {  get; private set; }
+        public ushort? MajorId {  get; private set; }
     }
 }

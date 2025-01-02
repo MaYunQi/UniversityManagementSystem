@@ -7,6 +7,7 @@ namespace UniversityManagementSystem.Domain.Interfaces.StudentInterface
     public interface IStudentService
     {
         Task<Student> GetStudentByIdAsync(int id);
+        Task<Student> GetStudentByStudentIdAsync(int studentId);
         Task<int> AddStudentAsync(Student student);
         Task<int> UpdateStudentAsync(Student student);
         Task<int> DeleteStudentAsync(int id);
@@ -20,5 +21,6 @@ namespace UniversityManagementSystem.Domain.Interfaces.StudentInterface
         Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(int facultyId);
         Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(int courseId);
         Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(int majorId);
+        Task<int> GetLastStudentIdByFacultyIdAndDegreeAsync(int facultyId, Degree degree);
     }
 }

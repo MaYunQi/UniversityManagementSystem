@@ -1,0 +1,22 @@
+﻿
+using AutoMapper;
+using UniversityManagementSystem.Application.DTOs.StudentDTOs;
+using UniversityManagementSystem.Domain.Entities.StudentEntity;
+
+namespace UniversityManagementSystem.Application.Mappings
+{
+    public class StudentProfile: Profile
+    {
+        public StudentProfile()
+        {
+            CreateMap<Student,CreateStudentDTO>();
+            CreateMap<CreateStudentDTO, CreateStudentDTO>();
+
+            CreateMap<Student,UpdateStudentDTO>();
+            CreateMap<UpdateStudentDTO, Student>();
+
+            CreateMap<Student,GetStudentDTO>();
+            CreateMap<GetStudentDTO, Student>();
+        }
+    }
+}
