@@ -1,5 +1,4 @@
 ﻿
-using System.Text;
 using UniversityManagementSystem.Domain.Entities.AcademicEntity;
 using UniversityManagementSystem.Domain.Entities.OtherEntity;
 using UniversityManagementSystem.Domain.Entities.StudentEntity;
@@ -17,7 +16,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             _studentRepository = studentRepository;
             _facultyRepository=facultyRepository;
         }
-        public async Task<Student> GetStudentByIdAsync(int id)
+        public async Task<Student> GetStudentByIdAsync(uint id)
         {
             if (id < 0)
                 return null;
@@ -31,7 +30,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             int result=await _studentRepository.UpdateStudentAsync(student);
             if(result==0)
             {
-                Student local = await _studentRepository.GetStudentByIdAsync(student.StudentId);
+                Student local = await _studentRepository.GetStudentByIdAsync(student.Id);
                 if(local==null)
                     return -1;
                 else
@@ -47,7 +46,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             int result=await _studentRepository.AddStudentAsync(student); 
             if(result==0)
             {
-                Student local = await _studentRepository.GetStudentByIdAsync(student.StudentId);
+                Student local = await _studentRepository.GetStudentByIdAsync(student.Id);
                 if (local != null)
                     return -1;
                 else 
@@ -56,7 +55,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             return result;
         }
 
-        public async Task<int> DeleteStudentAsync(int id)
+        public async Task<int> DeleteStudentAsync(uint id)
         {
             if(id<0)
                 return -1;
@@ -92,17 +91,17 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             return await _studentRepository.GetAllStudentsByDegreeAsync(Degree.PhD);
         }
 
-        public async Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(sbyte facultyId)
         {
             if (facultyId < 0)
                 return null;
-            Faculty faculty=await _facultyRepository.GetFacultyByIdAsync(facultyId);
+            Faculty faculty = await _facultyRepository.GetFacultyByIdAsync(facultyId);
             if (faculty == null)
                 return null;
             return await _studentRepository.GetAllStudentsByFacultyIdAsync(facultyId);
         }
 
-        public async Task<IEnumerable<Student>> GetAllUndergraduateStudentsByFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllUndergraduateStudentsByFacultyIdAsync(sbyte facultyId)
         {
             IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
             if (allStudents == null)
@@ -110,7 +109,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             return allStudents.Where(stu => stu.Degree == Degree.Bachelor).ToList();
         }
 
-        public async Task<IEnumerable<Student>> GetAllGraduateStudentsByFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllGraduateStudentsByFacultyIdAsync(sbyte facultyId)
         {
             IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
             if (allStudents == null)
@@ -118,7 +117,7 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             return allStudents.Where(stu => stu.Degree == Degree.Master).ToList();
         }
 
-        public async Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(sbyte facultyId)
         {
             IEnumerable<Student> allStudents = await GetAllStudentsByFacultyIdAsync(facultyId);
             if (allStudents == null)
@@ -126,24 +125,29 @@ namespace UniversityManagementSystem.Domain.Services.StudentServices
             return allStudents.Where(stu => stu.Degree == Degree.PhD).ToList();
         }
 
-        public Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(int courseId)
+        public Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(ushort courseId)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(int majorId)
+        public async Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(ushort majorId)
         {
             return await _studentRepository.GetAllStudentsByMajorIdAsync(majorId);
         }
 
-        public async Task<Student> GetStudentByStudentIdAsync(int studentId)
+        public async Task<Student> GetStudentByStudentIdAsync(ulong studentId)
         {
             return await _studentRepository.GetStudentByStudentIdAsync(studentId);
         }
 
-        public async Task<int> GetLastStudentIdByFacultyIdAsync(int facultyId,Degree degree)
+        public async Task<ulong> GetLastStudentIdByFacultyIdAsync(sbyte facultyId,Degree degree)
         {
             return await _studentRepository.GetLastStudentIdByFacultyIdAndDegreeAsync(facultyId, degree);
+        }
+
+        public async Task<ulong> GetLastStudentIdByFacultyIdAndDegreeAsync(sbyte facultyId, Degree degree)
+        {
+            return await _studentRepository.GetLastStudentIdByFacultyIdAndDegreeAsync(facultyId,degree);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace UniversityManagementSystem.Domain.Services.AcademicServices
             return result;
         }
 
-        public async Task<int> DeleteCourseAsync(int courseId)
+        public async Task<int> DeleteCourseAsync(ushort courseId)
         {
             if (courseId < 0)
                 return -1;
@@ -62,7 +62,7 @@ namespace UniversityManagementSystem.Domain.Services.AcademicServices
             return await _courseRepository.GetCourseByCourseCodeAsync(code);
         }
 
-        public async Task<Course> GetCourseByCourseIdAsync(int courseId)
+        public async Task<Course> GetCourseByCourseIdAsync(ushort courseId)
         {
             return await _courseRepository.GetCourseByCourseIdAsync(courseId);
         }
@@ -71,12 +71,12 @@ namespace UniversityManagementSystem.Domain.Services.AcademicServices
             return await _courseRepository.GetAllCoursesAsync();
         }
 
-        public async Task<IEnumerable<Course>> GetAllCoursesByFacultyIdAsync(int facultId)
+        public async Task<IEnumerable<Course>> GetAllCoursesByFacultyIdAsync(sbyte facultId)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Course>> GetAllCoursesByMajorIdAsync(int majorId)
+        public async Task<IEnumerable<Course>> GetAllCoursesByMajorIdAsync(ushort majorId)
         {
             throw new NotImplementedException();
         }

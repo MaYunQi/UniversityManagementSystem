@@ -32,7 +32,7 @@ namespace UniversityManagementSystem.Domain.Services.StaffServices
             return result;
         }
 
-        public async Task<int> DeleteStaffAsync(int id)
+        public async Task<int> DeleteStaffAsync(uint id)
         {
             if (id < 0)
                 return -1;
@@ -76,7 +76,7 @@ namespace UniversityManagementSystem.Domain.Services.StaffServices
             return await GetAllStaffByStaffTypeAsync(StaffType.Other);
         }
 
-        public async Task<IEnumerable<Staff>> GetAllStaffByFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Staff>> GetAllStaffByFacultyIdAsync(sbyte facultyId)
         {
             if (facultyId < 0)
                 return null;
@@ -88,7 +88,7 @@ namespace UniversityManagementSystem.Domain.Services.StaffServices
             return null;
         }
 
-        public async Task<Staff> GetStaffByIdAsync(int id)
+        public async Task<Staff> GetStaffByIdAsync(uint id)
         {
             if (id < 0)
                 return null;

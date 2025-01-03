@@ -11,11 +11,11 @@ namespace UniversityManagementSystem.Domain.Interfaces.StaffInterface
         Task<IEnumerable<Staff>> GetAllAdministrativeStaffAsync();
         Task<IEnumerable<Staff>> GetAllLogisticStaffAsync();
         Task<IEnumerable<Staff>> GetAllOtherStaffAsync();
-        Task<IEnumerable<Staff>> GetAllStaffByFacultyIdAsync(int facultyId);
+        Task<IEnumerable<Staff>> GetAllStaffByFacultyIdAsync(sbyte facultyId);
         Task<IEnumerable<Staff>> GetAllStaffByStaffTypeAsync(StaffType type);
-        Task<Staff> GetStaffByIdAsync(int id);
+        Task<Staff> GetStaffByIdAsync(uint id);
         Task<int> AddStaffAsync(Staff staff);
-        Task<int> DeleteStaffAsync(int id);
+        Task<int> DeleteStaffAsync(uint id);
         Task<int> UpdateStaffAsync(Staff staff);
     }
 }

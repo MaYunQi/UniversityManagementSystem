@@ -4,7 +4,7 @@ namespace UniversityManagementSystem.UI.Validations
 {
     public class DateOfBirthValidation:ValidationAttribute
     {
-        private readonly int minimumYear = 2000;
+        private readonly int minimumYear = 1980;
         public DateOfBirthValidation() { }
         public DateOfBirthValidation(int minimumyear)
         {

@@ -1,7 +1,13 @@
-
 using Microsoft.EntityFrameworkCore;
 using UniversityManagementSystem.Application.Mappings;
+using UniversityManagementSystem.Application.Services;
+using UniversityManagementSystem.Domain.Interfaces.AcademicInterface;
+using UniversityManagementSystem.Domain.Interfaces.StudentInterface;
+using UniversityManagementSystem.Domain.Services.AcademicServices;
+using UniversityManagementSystem.Domain.Services.StudentServices;
 using UniversityManagementSystem.Infrastructure.DbContexts;
+using UniversityManagementSystem.Infrastructure.Repositories;
+using UniversityManagementSystem.UI.ViewModelMapping;
 
 namespace UniversityManagementSystem.UI
 {
@@ -11,16 +17,26 @@ namespace UniversityManagementSystem.UI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<WebApplicationDBContext>(options => options.UseMySql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                new MySqlServerVersion(new Version(8,0,40))));
+            builder.Services.AddDbContext<WebApplicationDBContext>(option =>
+            option.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
+            new MySqlServerVersion("8.0.40")
+            ));
+
            
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddAutoMapper(cfg =>
             {
                 cfg.AddProfile<StudentProfile>();
+                cfg.AddProfile<StudentVMProfile>();
             });
+            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+            builder.Services.AddScoped<IStudentService, StudentService>();
+            builder.Services.AddScoped<StudentAppService>();
+
+            builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
+            builder.Services.AddScoped<IFacultyService, FacultyService>();
+            //builder.Services.AddScoped<FacultyAppService>();
 
             var app = builder.Build();
 
@@ -30,8 +46,9 @@ namespace UniversityManagementSystem.UI
             }
             app.UseStaticFiles();
             app.UseRouting();
-            app.MapControllers();
-
+            app.MapControllerRoute(
+                name:"Defalut",
+                pattern:"{controller=Home}/{Action=Index}/{id?}");
             app.Run();
         }
     }

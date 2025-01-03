@@ -5,7 +5,7 @@ namespace UniversityManagementSystem.Application.DTOs.StudentDTOs
 {
     public class GetStudentDTO
     {
-        public int StudentId { get; set; }
+        public ulong StudentId { get; set; }
         public Guid Guid { get; set; }
         public string FirstName { get; set; }
         public string? MiddleName { get; set; }

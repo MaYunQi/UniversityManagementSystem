@@ -20,7 +20,7 @@ namespace UniversityManagementSystem.Domain.Services.AlumniServices
         /// </summary>
         /// <param name="id">Alumni Id</param>
         /// <returns>Alumni Instance</returns>
-        public async Task<Alumni> GetAlumniByIdAsync(int id)
+        public async Task<Alumni> GetAlumniByIdAsync(uint id)
         {
             if (id < 0)
                 return null;
@@ -47,7 +47,7 @@ namespace UniversityManagementSystem.Domain.Services.AlumniServices
             }
             return result;
         }
-        public async Task<int> DeleteAlumniAsync(int id)
+        public async Task<int> DeleteAlumniAsync(uint id)
         {
             if (id < 0)
                 return -1;
@@ -93,17 +93,17 @@ namespace UniversityManagementSystem.Domain.Services.AlumniServices
         {
             return await _alumniRepository.GetAllAlumniByDegreeAsync(Degree.PhD);
         }
-        public async Task<IEnumerable<Alumni>> GetAllAlumniByYearAsync(int year)
+        public async Task<IEnumerable<Alumni>> GetAllAlumniByYearAsync(ushort year)
         {
             if (year < 0 || year > DateTime.Now.Year)
                 return null;
             return await _alumniRepository.GetAllAlumniByYearAsync(year);
         }
-        public async Task<IEnumerable<Alumni>> GetAllAlumniByMajorIdAsync(int id)
+        public async Task<IEnumerable<Alumni>> GetAllAlumniByMajorIdAsync(ushort id)
         {
             throw new NotImplementedException();
         }
-        public async Task<IEnumerable<Alumni>> GetAllAlumniByFacultyIdAsync(int id)
+        public async Task<IEnumerable<Alumni>> GetAllAlumniByFacultyIdAsync(sbyte id)
         {
             if (id < 0)
                 return null;
@@ -120,7 +120,7 @@ namespace UniversityManagementSystem.Domain.Services.AlumniServices
         {
             throw new NotImplementedException();
         }
-        public async Task<int> BatchDeleteAlumniAsync(IEnumerable<int> idList)
+        public async Task<int> BatchDeleteAlumniAsync(IEnumerable<uint> idList)
         {
             throw new NotImplementedException();
         }

@@ -25,7 +25,7 @@ namespace UniversityManagementSystem.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<int> DeleteStudentAsync(int id)
+        public async Task<int> DeleteStudentAsync(uint id)
         {
             Student student = await _dbContext.Students.FirstOrDefaultAsync(s => s.StudentId == id);
             if (student != null) 
@@ -46,17 +46,17 @@ namespace UniversityManagementSystem.Infrastructure.Repositories
             return await _dbContext.Students.Where(x=>x.Degree==degree).ToListAsync();
         }
 
-        public async Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(int facultyId)
+        public async Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(sbyte facultyId)
         {
             return await _dbContext.Students.Where(s=>s.FacultyId==facultyId).ToListAsync();
         }
 
-        public async Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(int majorId)
+        public async Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(ushort majorId)
         {
             return await _dbContext.Students.Where(s => s.MajorId == majorId).ToListAsync();
         }
 
-        public async Task<Student> GetStudentByIdAsync(int id)
+        public async Task<Student> GetStudentByIdAsync(uint id)
         {
             return await _dbContext.Students.FirstOrDefaultAsync(s=>s.Id==id);
         }
@@ -66,15 +66,15 @@ namespace UniversityManagementSystem.Infrastructure.Repositories
             _dbContext.Students.Update(student);
             return await _dbContext.SaveChangesAsync();
         }
-        public async Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(int courseId)
+        public async Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(ushort courseId)
         {
             throw new NotImplementedException();
         }
-        public async Task<Student> GetStudentByStudentIdAsync(int studentId)
+        public async Task<Student> GetStudentByStudentIdAsync(ulong studentId)
         {
             return await _dbContext.Students.FirstOrDefaultAsync(s => s.StudentId == studentId);
         }
-        public async Task<int> GetLastStudentIdByFacultyIdAndDegreeAsync(int facultyId,Degree degree)
+        public async Task<ulong> GetLastStudentIdByFacultyIdAndDegreeAsync(sbyte facultyId,Degree degree)
         {
             return await _dbContext.Students
                 .Where(s => s.FacultyId == facultyId && s.Degree == degree)

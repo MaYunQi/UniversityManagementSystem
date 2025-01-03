@@ -27,7 +27,7 @@ namespace UniversityManagementSystem.Domain.Services.AcademicServices
             return result;
         }
 
-        public async Task<int> DeleteFacultyAsync(int id)
+        public async Task<int> DeleteFacultyAsync(sbyte id)
         {
             if (id < 0)
                 return -1;
@@ -48,7 +48,7 @@ namespace UniversityManagementSystem.Domain.Services.AcademicServices
             return _facultyRepository.GetAllFacultiesAsync();
         }
 
-        public async Task<Faculty> GetFacultyByIdAsync(int id)
+        public async Task<Faculty> GetFacultyByIdAsync(sbyte id)
         {
             if (id < 0)
                 return null;

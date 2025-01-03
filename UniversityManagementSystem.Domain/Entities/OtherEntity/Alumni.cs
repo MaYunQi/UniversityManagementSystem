@@ -2,7 +2,7 @@
 {
     public class Alumni : BaseEntity
     {
-        public int AlumniId { get; private set; }
+        public uint AlumniId { get; private set; }
         public Guid Guid { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

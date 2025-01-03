@@ -3,7 +3,7 @@ namespace UniversityManagementSystem.Application.DTOs.StudentDTOs
 {
     public class UpdateStudentDTO
     {
-        public int Id { get;private set; }
+        public uint Id { get;private set; }
         public string PhoneNo { get; set; }
         public string Address { get; set; }
         public int? SupervisorId { get; set; }

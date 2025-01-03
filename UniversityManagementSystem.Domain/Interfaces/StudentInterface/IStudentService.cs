@@ -6,21 +6,21 @@ namespace UniversityManagementSystem.Domain.Interfaces.StudentInterface
 {
     public interface IStudentService
     {
-        Task<Student> GetStudentByIdAsync(int id);
-        Task<Student> GetStudentByStudentIdAsync(int studentId);
+        Task<Student> GetStudentByIdAsync(uint id);
+        Task<Student> GetStudentByStudentIdAsync(ulong studentId);
         Task<int> AddStudentAsync(Student student);
         Task<int> UpdateStudentAsync(Student student);
-        Task<int> DeleteStudentAsync(int id);
+        Task<int> DeleteStudentAsync(uint id);
         Task<IEnumerable<Student>> GetAllStudentsAsync();
         Task<IEnumerable<Student>> GetAllUndergraduateStudentsAsync();
         Task<IEnumerable<Student>> GetAllGraduateStudentsAsync();
         Task<IEnumerable<Student>> GetAllDoctoralStudentsAsync();
-        Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(int facultyId);
-        Task<IEnumerable<Student>> GetAllUndergraduateStudentsByFacultyIdAsync(int facultyId);
-        Task<IEnumerable<Student>> GetAllGraduateStudentsByFacultyIdAsync(int facultyId);
-        Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(int facultyId);
-        Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(int courseId);
-        Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(int majorId);
-        Task<int> GetLastStudentIdByFacultyIdAndDegreeAsync(int facultyId, Degree degree);
+        Task<IEnumerable<Student>> GetAllStudentsByFacultyIdAsync(sbyte facultyId);
+        Task<IEnumerable<Student>> GetAllUndergraduateStudentsByFacultyIdAsync(sbyte facultyId);
+        Task<IEnumerable<Student>> GetAllGraduateStudentsByFacultyIdAsync(sbyte facultyId);
+        Task<IEnumerable<Student>> GetAllDoctoralStudentsByFacultyIdAsync(sbyte facultyId);
+        Task<IEnumerable<Student>> GetAllStudentsByCourseIdAsync(ushort  courseId);
+        Task<IEnumerable<Student>> GetAllStudentsByMajorIdAsync(ushort majorId);
+        Task<ulong> GetLastStudentIdByFacultyIdAndDegreeAsync(sbyte facultyId, Degree degree);
     }
 }

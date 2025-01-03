@@ -4,7 +4,8 @@ namespace UniversityManagementSystem.Domain.Entities.StaffEntity
 {
     public  class Staff : BaseEntity
     {
-        public int StaffId { get; private set; }
+        public uint StaffId { get; private set; }
+        public string PasswordHash { get; set; }
         public Guid Guid { get; private set; }
         public string FirstName { get; set; }
         public string? MiddleName { get; set; }

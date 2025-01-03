@@ -10,7 +10,7 @@ namespace UniversityManagementSystem.Application.Mappings
         public StudentProfile()
         {
             CreateMap<Student,CreateStudentDTO>();
-            CreateMap<CreateStudentDTO, CreateStudentDTO>();
+            CreateMap<CreateStudentDTO, Student>();
 
             CreateMap<Student,UpdateStudentDTO>();
             CreateMap<UpdateStudentDTO, Student>();

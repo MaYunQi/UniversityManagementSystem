@@ -1,0 +1,90 @@
+﻿@model UniversityManagementSystem.UI.ViewModels.StudentVM
+
+@{
+    ViewData["Title"] = "AddStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AddStudent</h1>
+
+<h4>StudentVM</h4>
+<hr />
+<div>
+    <div>
+        <form method="post" action="/Student/AddStudent">
+            <div>
+                <label name="FirstName">FirstName</label>
+                <input name="FirstName" />
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <div>
+                <label name="MiddleName">MiddleName</label>
+                <input name="MiddleName"/>
+                <span asp-validation-for="MiddleName"></span>
+            </div>
+            <div>
+                <label name="LastName">LastName</label>
+                <input name="LastName" />
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div>
+                <label name="Gender">Gender</label>
+                <input name="Gender" />
+                <span asp-validation-for="Gender"></span>
+            </div>
+            <div>
+                <label name="Email">Email</label>
+                <input name="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div>
+                <label name="NationId">NationId</label>
+                <input name="NationId" />
+                <span asp-validation-for="NationId"></span>
+            </div>
+            <div>
+                <label name="DateOfBirth">DateOfBirth</label>
+                <input name="DateOfBirth"/>
+                <span asp-validation-for="DateOfBirth"></span>
+            </div>
+            <div >
+                <label name="EnrollmentDate">EnrollmentDate</label>
+                <input name="EnrollmentDate"  />
+                <span asp-validation-for="EnrollmentDate" ></span>
+            </div>
+            <div >
+                <label name="PhoneNo">PhoneNo</label>
+                <input name="PhoneNo"/>
+                <span asp-validation-for="PhoneNo"></span>
+            </div>
+            <div >
+                <label name="Address">Address</label>
+                <input name="Address" />
+                <span asp-validation-for="Address" ></span>
+            </div>
+            <div >
+                <label name="FacultyId">FacultyId</label>
+                <input name="FacultyId"  />
+                <span asp-validation-for="FacultyId" ></span>
+            </div>
+            <div >
+                <label name="MajorId">MajorId</label>
+                <input name="MajorId" />
+                <span asp-validation-for="MajorId"></span>
+            </div>
+            <div >
+                <label name="Degree">Degree</label>
+                <input name="Degree"  />
+                <span asp-validation-for="Degree"></span>
+            </div>
+            <div >
+                <input type="submit" value="Create" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

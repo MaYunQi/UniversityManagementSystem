@@ -4,7 +4,8 @@ namespace UniversityManagementSystem.Domain.Entities.StudentEntity
 {
     public class Student : BaseEntity
     {
-        public int StudentId { get;  set; }
+        public ulong StudentId { get;  set; }
+        public string PasswordHash { get; set; }
         public Guid Guid { get;  set; }
         public string FirstName { get; set; }
         public string? MiddleName { get; set; }

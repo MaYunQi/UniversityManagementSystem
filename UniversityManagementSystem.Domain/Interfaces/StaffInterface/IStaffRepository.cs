@@ -7,11 +7,11 @@ namespace UniversityManagementSystem.Domain.Interfaces.StaffInterface
     public interface IStaffRepository
     {
         Task<IEnumerable<Staff>> GetAllStaffAsync();
-        Task<IEnumerable<Staff>> GetAllStaffByFacultyIdAsync(int facultyId);
+        Task<IEnumerable<Staff>> GetAllStaffByFacultyIdAsync(sbyte facultyId);
         Task<IEnumerable<Staff>> GetAllStaffByStaffTypeAsync(StaffType type);
-        Task<Staff> GetStaffByIdAsync(int id);
+        Task<Staff> GetStaffByIdAsync(uint id);
         Task<int> AddStaffAsync(Staff staff);
-        Task<int> DeleteStaffAsync(int id);
+        Task<int> DeleteStaffAsync(uint id);
         Task<int> UpdateStaffAsync(Staff staff);
     }
 }

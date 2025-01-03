@@ -5,10 +5,10 @@ namespace UniversityManagementSystem.Domain.Interfaces.AcademicInterface
 {
     public interface IFacultyRepository
     {
-        Task<Faculty> GetFacultyByIdAsync(int id);
+        Task<Faculty> GetFacultyByIdAsync(sbyte id);
         Task<IEnumerable<Faculty>> GetAllFacultiesAsync();
         Task<int> AddFacultyAsync(Faculty faculty);
-        Task<int> DeleteFacultyAsync(int id);
+        Task<int> DeleteFacultyAsync(sbyte id);
         Task<int> UpdateFacultyAsync(Faculty faculty);
     }
 }
