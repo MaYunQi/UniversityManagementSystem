@@ -13,14 +13,14 @@ ASP.NET Core 8.0.11
 ## ORM
 EntityFramework Core 8.0.11  
 
-**The Latest verion of EntityFramework Core 9.0 is incompatible with Polemo.EntityFrameworkCore.MySql 8.0.2!!**
+**NOTICE: The Latest verion of EntityFramework Core 9.0 is incompatible with Polemo.EntityFrameworkCore.MySql 8.0.2!!**
 
 ## Database
 MySQL 8.0.40 Community
   
 ## Package
-Moq 4.20.72
-AutoMapper 13.0.1
+Moq 4.20.72  
+AutoMapper 13.0.1  
 Polemo.EntityFrameworkCore.MySql 8.0.2
 
 ## Toturial  
