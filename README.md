@@ -11,7 +11,8 @@ Visual Studio 2022 Community
 ASP.NET Core 8.0.11  
   
 ## ORM
-EntityFramework Core 8.0.11
+EntityFramework Core 8.0.11  
+
 **The Latest verion of EntityFramework Core 9.0 is incompatible with Polemo.EntityFrameworkCore.MySql 8.0.2!!**
 
 ## Database
