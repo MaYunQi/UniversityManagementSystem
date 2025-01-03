@@ -11,7 +11,7 @@ Visual Studio 2022 Community
 ASP.NET Core 8.0  
   
 ## ORM
-EntityFramework Core
+EntityFramework Core 8.0.11
   
 ## Database
 MySQL 8.0 Community
